@@ -1,0 +1,17 @@
+---
+- name: Understanding vars
+  hosts: all
+  become: yes
+  vars:
+    USR: playuser
+    COMM: variable from the playbook  
+  tasks:
+    - name: create user
+      ansible.builtin.user:
+         name: "{{USR}}"
+         comment: "{{COMM}}"  
+      register: usrout
+    - debug:
+        var: usrout.name
+    - debug: 
+        var: usrout.comment      
